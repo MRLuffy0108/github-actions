@@ -1,0 +1,22 @@
+name: Build Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate build number
+        run: echo "${{ github.run_number }}" > build_number.txt
+
+      - name: Upload build number
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-number
+          path: build_number.txt
