@@ -22,7 +22,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          repo= ${{ github.repository }}
+          repo="${{ github.repository }}"
           git pull
           git add .build/build_number.txt
           git commit -m "Update build number to ${{ github.run_number }}"
