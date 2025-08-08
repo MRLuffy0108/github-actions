@@ -1,19 +1,26 @@
-name: Build Workflow
+name: Build
 
 on:
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Generate build number
-        run: echo "${{ github.run_number }}" > build_number.txt
+      - name: Set build number
+        run: echo "${{ github.run_number }}" > .build/build_number.txt
 
-      - name: Upload build number
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-number
-          path: build_number.txt
+      - name: Configure Git
+        run: |
+          git config user.name "MRLuffy0108"
+          git config user.email "mohanraj.r14@tcs.com"
+
+      - name: Commit build number
+        run: |
+          git add .build/build_number.txt
+          git commit -m "Update build number to ${{ github.run_number }}"
+          git push
