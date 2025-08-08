@@ -16,8 +16,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "MRLuffy0108"
-          git config user.email "mohanraj.r14@tcs.com"
+          git config --global user.name "MRLuffy0108"
+          git config --global user.email "mohanraj.r14@tcs.com"
       - name: Commit build number
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
